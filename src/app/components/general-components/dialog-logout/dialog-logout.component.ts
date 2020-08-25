@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/Services/authentication.service';
 import { Router } from '@angular/router';
@@ -20,6 +21,6 @@ export class DialogLogoutComponent implements OnInit {
   logout(){
     this._auth.logout();
     console.log("log out successfully!");
-    window.location.href="http://localhost:4201/login";
+    window.location.href= environment.BLOUSE_ADMIN + "login";
   }
 }

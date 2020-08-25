@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import decode from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +54,7 @@ export class LoginComponent implements OnInit {
           console.log("Login successfully");
           this.loginFailMessage = '';
           
-          window.location.href="http://localhost:4201/doctors";
+          window.location.href= environment.BLOUSE_ADMIN + "doctors";
         }
 
       },
