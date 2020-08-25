@@ -1,0 +1,75 @@
+table {
+    width: 100%;
+  }
+  .container-doctor {
+      padding: 40px;
+  }
+  .mat-form-field {
+    font-size: 14px;
+    width: 50%;
+    display: block;
+  }
+  .mat-header-cell {
+    background-color: cornflowerblue;
+  }
+  .displayProcess {
+    position: relative;
+  }
+
+  .mat-headline {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    color: crimson;
+  }
+  td,
+  th {
+    width: 25%;
+  }
+  /* .mat-elevation-z8, mat-paginator{
+      width: 50%;
+  } */
+  .mat-icon-button{
+    color: yellowgreen;
+  }
+  
+  .doctor-card {
+    max-width: 250px;
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 50px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  .displayCards{
+    position: relative;
+    margin-top: 30px;
+    padding: 40px;
+  }
+
+  .displayFilter{
+    padding: 40px;
+  }
+  .selectHospital, .searchInput, .selectDepartment, .searchButton, .addButton{
+    
+    display: inline-block;
+  }
+  .selectHospital{
+    float: left;
+    width: 20%;
+  } 
+  .searchInput{
+    float: left;
+    width: 20%;
+  }
+  .selectDepartment{
+    float: left;
+    width: 20%;
+  }
+
+  .addButton {
+    float: right;
+    width: 5%;
+  }

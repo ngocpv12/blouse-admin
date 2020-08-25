@@ -1,0 +1,115 @@
+<div class="container-doctor">
+  <div class="mat-headline">Thông tin các bệnh án điện tử</div>
+  <div class="displayFilter">
+    <div class="searchInput">
+      <mat-form-field>
+        <mat-label>Tìm kiếm bệnh án điện tử</mat-label>
+        <input
+          #inputSearch
+          name="search"
+          [(ngModel)]="searchText"
+          matInput
+          placeholder="Điền dữ liệu bạn muốn tìm"
+        />
+      </mat-form-field>
+    </div>
+    <div class="searchButton">
+      <button
+        (click)="searchMedicalRecord(searchText)"
+        mat-raised-button
+        color="primary"
+      >
+        Tìm kiếm
+      </button>
+    </div>
+  </div>
+  <label> {{ notFound }} </label>
+  <mat-table [(dataSource)]="dataSource" matSort class="mat-elevation-z8">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell
+        [style.display]="'none'"
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        ID number
+      </mat-header-cell>
+      <mat-cell [style.display]="'none'" *matCellDef="let element">
+        {{ element.id }}
+      </mat-cell>
+    </ng-container>
+    <!-- index Column -->
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        STT
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        {{ i + 1 }}
+      </mat-cell>
+    </ng-container>
+    <!-- patient name  Column -->
+    <ng-container matColumnDef="patientName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Tên bệnh nhân
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{element.medicalExamination.patient.user.fullName}}
+      </mat-cell>
+    </ng-container>
+    <!-- username Column -->
+    <ng-container matColumnDef="pathology">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Bệnh lý
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.pathology || "nodata" }}
+      </mat-cell>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="treatment">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Phương pháp điều trị
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.treatment || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Active status Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Mô tả
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.description }}
+      </mat-cell>
+    </ng-container>
+    <!-- Active status Column -->
+    <ng-container matColumnDef="isActive">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Trạng thái hoạt động
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-slide-toggle
+          [color]="colorSlide"
+          [checked]="element.isActive === 1"
+          (click)="setActive(element.id)"
+        >
+        </mat-slide-toggle>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Active status Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button (click)="openDialog(element)" mat-button color="primary">
+          Chi tiết
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
+</div>

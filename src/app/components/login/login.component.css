@@ -1,0 +1,36 @@
+:host {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+    min-width: 300px;
+  }
+  mat-card {
+      margin-top: 130px;
+      padding: 40px;
+      width: 20%;
+      min-width: 350px;
+  }
+  mat-card-content{
+      margin-top: 80px;
+      
+  }
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-submit{
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+      margin-left: 148px;
+      width: 100px;
+  }
+  #loginFail{
+      color:red;
+  }

@@ -1,0 +1,119 @@
+<div class="container-doctor">
+    <div class="mat-headline">Thông tin lịch sử thanh toán</div>
+    <div class="displayFilter">
+      <div class="searchInput">
+        <mat-form-field>
+          <mat-label>Tìm kiếm thanh toán</mat-label>
+          <input
+            #inputSearch
+            name="search"
+            [(ngModel)]="searchText"
+            matInput
+            placeholder="Nhập dữ liệu bạn muốn tìm kiếm"
+          />
+        </mat-form-field>
+      </div>
+      <div class="searchButton">
+        <button
+          (click)="searchPayment(searchText)"
+          mat-raised-button
+          color="primary"
+        >
+          Tìm kiếm
+        </button>
+      </div>
+    </div>
+    <label> {{ notFound }} </label>
+    <div class="vertical-message" *ngIf="noPayments">
+      <span style="color: #3c4043;">Người dùng không có khoản thanh toán nào</span>
+      <button
+          mat-icon-button
+          aria-label="View payments"
+          (click)="reloadPage()"
+          style="float: right; margin-top: -10px;"
+        >
+        <mat-icon color="primary">replay</mat-icon>
+      </button>
+    </div>
+    <mat-table [(dataSource)]="dataSource" matSort class="mat-elevation-z8">
+      <!-- index Column -->
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          STT
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index">
+          {{ i + 1 }}
+        </mat-cell>
+      </ng-container>
+      <!-- id Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Mã thanh toán
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.id || "nodata" }}
+        </mat-cell>
+      </ng-container>
+      <!-- username Column -->
+      <ng-container matColumnDef="patient">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Tên người bệnh
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.patient.user.fullName || "nodata" }}
+        </mat-cell>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="examinationId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Mã phiếu khám
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.medicalExamination.id || "No Data" }}
+        </mat-cell>
+      </ng-container>
+  
+      <!-- dob Column -->
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Số tiền (VNĐ)
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.amount || "No data" }}
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Title Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Trạng thái
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.status === 1 ? "Đã thanh toán" : "Chưa thanh toán" || "No Data" }}
+        </mat-cell>
+      </ng-container>
+      <!-- Active status Column -->
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Thời gian tạo
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.createdAt | date:'short' }}
+        </mat-cell>
+      </ng-container>
+      <!-- Active status Column -->
+      <ng-container matColumnDef="modifiedAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Thời gian thanh toán
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.status === 1 ? (element.modifiedAt | date:'short') : ""}}
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
+  </div>
+  

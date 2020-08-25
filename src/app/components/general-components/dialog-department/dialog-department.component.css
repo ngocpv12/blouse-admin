@@ -1,0 +1,26 @@
+.container{
+    padding: 20px;
+}
+.displayButton{
+    position: relative;
+}
+.mat-raised-button{
+    display: block;
+}
+.component-button{
+    position: absolute;
+    display: block;
+    top: 0;
+    right:0;
+}
+.button-submit{
+    margin-left: 200px;
+}
+.mat-form-field, .radio-group{
+    display: block;
+    width: 400px;
+    height: 70px;
+}
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }

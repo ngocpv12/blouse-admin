@@ -1,0 +1,174 @@
+<div class="container-doctor">
+  <div class="mat-headline">Thông tin nhân viên</div>
+  <div class="displayFilter">
+    <div class="searchInput">
+      <mat-form-field>
+        <mat-label>Tìm kiếm nhân viên</mat-label>
+        <input
+          #inputSearch
+          name="search"
+          [(ngModel)]="searchText"
+          matInput
+          placeholder="Điền tên nhân viên muốn tìm"
+        />
+      </mat-form-field>
+    </div>
+    <div class="searchButton">
+      <button
+        (click)="searchStaff(searchText)"
+        mat-raised-button
+        color="primary"
+      >
+        Tìm kiếm
+      </button>
+    </div>
+    <div class="addButton">
+      <button mat-stroked-button color="primary" (click)="openDialog()">
+        Thêm nhân viên
+      </button>
+    </div>
+  </div>
+  <label> {{ notFound }} </label>
+
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <!-- index Column -->
+    <ng-container matColumnDef="index">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>
+        STT
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        {{ i + 1 }}
+      </mat-cell>
+    </ng-container>
+    <!-- Id Column -->
+    <ng-container  matColumnDef="id">
+      <mat-header-cell [style.display]="'none'" *matHeaderCellDef mat-sort-header>
+        ID number
+      </mat-header-cell>
+      <mat-cell [style.display]="'none'" *matCellDef="let element"> {{ element.id }} </mat-cell>
+    </ng-container>
+
+    <!-- Hospital Column -->
+    <ng-container matColumnDef="hospital">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Bệnh viện
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.hospital.name || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Chức danh
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.user.title || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="fullName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Tên
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.user.fullName || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Gender Column -->
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Giới tính
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.user.gender === 1 ? "Male" : "Female" || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Số điện thoại
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.user.phoneNumber || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- DateOfBirth Column -->
+    <ng-container matColumnDef="dateOfBirth">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Ngày tháng năm sinh
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.user.dateOfBirth || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Address Column -->
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Địa chỉ
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.user.address || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Địa chỉ Email
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.user.email || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Username Column -->
+    <ng-container matColumnDef="userName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Tên đăng nhập
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.user.username || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Avatar Column -->
+    <ng-container matColumnDef="avatar">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Ảnh đại diện
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.user.avatar || "No Data" }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button (click)="editRecord(row)" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <!-- Active Column -->
+    <ng-container matColumnDef="isActive">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Trạng thái hoạt động
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-slide-toggle [color]="colorSlide" [checked]="element.isActive === 1" (click)="setActive(element.id)"> </mat-slide-toggle>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
+</div>

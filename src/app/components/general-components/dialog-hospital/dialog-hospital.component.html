@@ -1,0 +1,198 @@
+
+<div class="container">
+  <h2 *ngIf="data.type === 'create'" mat-dialog-title>Add Hospital</h2>
+  <h2 *ngIf="data.type === 'edit'" mat-dialog-title>Edit Hospital</h2>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit(data.id)">
+      <input formControlName="id" type="hidden" [(ngModel)]="data.id" />
+      <mat-form-field>
+        <mat-label>Enter Name</mat-label>
+        <input
+          [class.is-invalid]="name.invalid && name.touched"
+          formControlName="name"
+          matInput
+          type="text"
+          [(ngModel)]="data.name"
+        />
+        <button
+          mat-button
+          *ngIf="data.name"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.name = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for name-->
+        <mat-error *ngIf="name.touched && name.invalid">
+          <small *ngIf="name.errors?.required" style="color: red;"
+            >Name is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- input title -->
+  
+      <mat-form-field>
+        <mat-label>Enter Address</mat-label>
+        <input
+          [class.is-invalid]="address.invalid && address.touched"
+          formControlName="address"
+          matInput
+          type="text"
+          [(ngModel)]="data.address"
+        />
+        <button
+          mat-button
+          *ngIf="data.address"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.address = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for title -->
+        <mat-error *ngIf="address.touched && address.invalid">
+          <small *ngIf="address.errors?.required" style="color: red;"
+            >Address is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter Phone</mat-label>
+        <input
+          [class.is-invalid]="phoneNumber.invalid && phoneNumber.touched"
+          formControlName="phoneNumber"
+          matInput
+          type="text"
+          [(ngModel)]="data.phoneNumber"
+        />
+        <button
+          mat-button
+          *ngIf="data.phoneNumber"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.phoneNumber = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for title -->
+        <mat-error *ngIf="phoneNumber.touched && phoneNumber.invalid">
+          <small *ngIf="phoneNumber.errors?.required" style="color: red;"
+            >Phone is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter Website</mat-label>
+        <input
+          [class.is-invalid]="website.invalid && website.touched"
+          formControlName="website"
+          matInput
+          type="text"
+          [(ngModel)]="data.website"
+        />
+        <button
+          mat-button
+          *ngIf="data.website"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.website = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for title -->
+        <mat-error *ngIf="website.touched && website.invalid">
+          <small *ngIf="website.errors?.required" style="color: red;"
+            >Website is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter Email</mat-label>
+        <input
+          [class.is-invalid]="email.invalid && email.touched"
+          formControlName="email"
+          matInput
+          type="email"
+          [(ngModel)]="data.email"
+        />
+        <button
+          mat-button
+          *ngIf="data.email"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.email = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for title -->
+        <mat-error *ngIf="email.touched && email.invalid">
+          <small *ngIf="email.errors?.required" style="color: red;"
+            >Email is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter Description</mat-label>
+        <input
+          [class.is-invalid]="description.invalid && description.touched"
+          formControlName="description"
+          matInput
+          type="text"
+          [(ngModel)]="data.description"
+        />
+        <button
+          mat-button
+          *ngIf="data.description"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.description = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for title -->
+        <mat-error *ngIf="description.touched && description.invalid">
+          <small *ngIf="description.errors?.required" style="color: red;"
+            >Description is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <div class="displayButton">
+        <button
+          class="button-submit"
+          *ngIf="data.type === 'create'"
+          [mat-dialog-close]="true"
+          [disabled]="!addForm.valid"
+          mat-raised-button
+          type="submit"
+        >
+          Add Record
+        </button>
+        <button
+          class="button-submit"
+          *ngIf="data.type === 'edit'"
+          [mat-dialog-close]="true"
+          [disabled]="!addForm.valid"
+          mat-raised-button
+          type="submit"
+        >
+          Update
+        </button>
+        <button mat-stroked-button class="component-button" [mat-dialog-close]>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  

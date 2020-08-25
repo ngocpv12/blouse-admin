@@ -1,0 +1,37 @@
+<div class="content">
+    <h2 style="text-align: center;">Bệnh án chi tiết</h2>
+    <table>
+        <tr>
+            <td class="title">Mã bệnh án</td>
+            <td>:</td>
+            <td>{{data.medicalRecordId}}</td>
+            
+        </tr>
+        <tr>
+            <td class="title">Bệnh nhân</td>
+            <td>:</td>
+            <td>{{data.patientName}}</td>
+        </tr>
+        <tr>
+            <td class="title">Bác sĩ khám</td>
+            <td>:</td>
+            <td>{{data.doctorName}}</td>
+        </tr>
+        <tr>
+            <td class="title">Mô tả chi tiết</td>
+            <td>:</td>
+            <td>{{data.description}}</td>
+        </tr>
+        <tr>
+            <td class="title">Bệnh lí</td>
+            <td>:</td>
+            <td>{{data.pathology}}</td>
+        </tr>
+        <tr>
+            <td class="title">Phương pháp điều trị</td>
+            <td>:</td>
+            <td>{{data.treatment}}</td>
+        </tr>
+    </table>
+    <button mat-raised-button [mat-dialog-close] >Đóng</button>
+</div>

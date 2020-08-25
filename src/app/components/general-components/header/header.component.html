@@ -1,0 +1,17 @@
+<mat-toolbar class="navbar" color="primary">
+    <div>
+        BLOUSE
+    </div>
+    <div>
+        <a [ngStyle]="{'color': currentIndex =='doctors' ? 'rgb(100 149 237)' : '' }" (click)="showDoctor()">Bác sĩ</a>
+        <a [ngStyle]="{'color': currentIndex =='patients' ? 'rgb(100 149 237)' : '' }" (click)="showPatient()">Bệnh nhân</a>
+        <a [ngStyle]="{'color': currentIndex =='department' ? 'rgb(100 149 237)' : '' }" (click)="showDepartment()">Khoa khám</a>
+        <a [ngStyle]="{'color': currentIndex =='hospital' ? 'rgb(100 149 237)' : '' }" (click)="showHospital()">Bệnh viện</a>
+        <a [ngStyle]="{'color': currentIndex =='staffs' ? 'rgb(100 149 237)' : '' }" (click)="showStaff()">Nhân viên</a>
+        <a [ngStyle]="{'color': currentIndex =='medical-records' ? 'rgb(100 149 237)' : '' }" (click)="showMedicalRecord()">Bệnh án điện tử</a>
+        <a [ngStyle]="{'color': currentIndex =='medical-examination' ? 'rgb(100 149 237)' : '' }" (click)="showExamination()">Lịch khám</a>
+        <a [ngStyle]="{'color': currentIndex =='payments' ? 'rgb(100 149 237)' : '' }" (click)="showPayment()">Thanh toán</a>
+        <a *ngIf="loginStatus == false" (click)=login()>Đăng nhập</a>
+        <a *ngIf="loginStatus == true" (click)=openDialog()>Đăng xuất</a>
+    </div>
+</mat-toolbar>

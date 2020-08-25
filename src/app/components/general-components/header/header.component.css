@@ -1,0 +1,15 @@
+/* .mat-toolbar{
+    background-color: transparent;
+} */
+.navbar{
+    justify-content: space-between;
+    background-color: #333646;
+}
+a{
+    padding-right: 2rem;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(100 149 237);
+}

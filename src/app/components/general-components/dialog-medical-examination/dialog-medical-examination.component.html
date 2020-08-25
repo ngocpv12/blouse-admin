@@ -1,0 +1,106 @@
+<div class="container">
+    <h2 *ngIf="data.type === 'edit'" mat-dialog-title>Cập nhật sổ khám</h2>
+  
+    <form [formGroup]="formData" (ngSubmit)="onSubmit(data.id)">
+      <input formControlName="id" type="hidden" [(ngModel)]="data.id" />
+
+      <!-- Người bệnh -->
+      <mat-form-field>
+        <mat-label>Tên người bệnh</mat-label>
+        <input
+          matInput
+          readonly
+          formControlName="patientId"
+          type="text"
+          [(ngModel)]="data.patient.user.fullName"
+        />
+      </mat-form-field>
+  
+      <!-- Khoa -->
+      <mat-form-field>
+        <mat-label>Khoa khám</mat-label>
+        <input
+          matInput
+          readonly
+          formControlName="departmentId"
+          [(ngModel)]="data.department.name"
+        />
+      </mat-form-field>
+  
+      <!-- Bác sĩ -->
+      <mat-form-field>
+        <mat-label>Bác sĩ</mat-label>
+        <mat-select
+            #selectDoctor
+            formControlName="doctorId"
+            [class.is-invalid]="doctorId.invalid && doctorId.touched"
+            [(ngModel)]="data.doctorId"
+        >
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
+                {{ doctor.user.fullName }}
+            </mat-option>
+        </mat-select>
+        
+        <mat-error *ngIf="doctorId.touched && doctorId.invalid">
+            <small *ngIf="doctorId.errors?.required" style="color: red;">
+                Vui lòng chọn bác sĩ
+            </small>
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Thời gian -->
+      <mat-form-field>
+        <mat-label>Thời gian</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [class.is-invalid]="appointmentTime.invalid && appointmentTime.touched"
+          formControlName="appointmentTime"
+          [(ngModel)]="data.appointmentTime"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        <mat-error *ngIf="appointmentTime.touched && appointmentTime.invalid">
+            <small *ngIf="appointmentTime.errors?.required" style="color: red;">
+                Vui lòng chọn thời gian khám
+            </small>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Thời gian -->
+      <mat-form-field>
+        <mat-label>Địa điểm</mat-label>
+        <input
+          [class.is-invalid]="place.invalid && place.touched"
+          formControlName="place"
+          matInput
+          type="text"
+          [(ngModel)]="data.place"
+        />
+        
+        <mat-error *ngIf="place.touched && place.invalid">
+            <small *ngIf="place.errors?.required" style="color: red;">
+                Vui lòng chọn địa điểm khám
+            </small>
+        </mat-error>
+      </mat-form-field>
+  
+      <div class="displayButton">
+        <button
+          class="button-submit"
+          *ngIf="data.type === 'edit'"
+          [mat-dialog-close]="true"
+          [disabled]="!formData.valid"
+          mat-raised-button
+          type="submit"
+        >
+          Xác nhận
+        </button>
+        <button mat-stroked-button class="component-button" [mat-dialog-close]>
+          Hủy
+        </button>
+      </div>
+    </form>
+  </div>
+  

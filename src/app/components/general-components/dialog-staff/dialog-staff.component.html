@@ -1,0 +1,271 @@
+<div class="container">
+    <h2 *ngIf="data.type === 'create'" mat-dialog-title>Add Staff</h2>
+    <h2 *ngIf="data.type === 'edit'" mat-dialog-title>Edit Staff</h2>
+
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit(data.id)">
+      
+      <!-- select hospital -->
+      <div class="selectHospital">
+        <mat-form-field>
+          <mat-label>Choose a hospital</mat-label>
+          <mat-select
+            #selectHospital
+            formControlName="hospital"
+            [class.is-invalid]="hospital.invalid && hospital.touched"
+            [(ngModel)]="data.hospital"
+          >
+            <mat-option  *ngFor="let hospital of hospitals" [value]="hospital.id">
+              {{ hospital.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Active -->
+      <div class="radio-group">
+        <p>Active</p>
+        <mat-radio-group
+          formControlName="isActive"
+          [class.is-invalid]="isActive.invalid"
+          aria-label="Active"
+        >
+          <mat-radio-button [checked]="data.isActive === 1" value="1"
+            >True
+          </mat-radio-button>
+          <mat-radio-button [checked]="data.isActive === 0" value="0"
+            >False
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+  
+      <!-- input name -->
+      <mat-form-field>
+        <mat-label>Enter Name</mat-label>
+        <input
+          [class.is-invalid]="fullName.invalid && fullName.touched"
+          formControlName="fullName"
+          matInput
+          type="text"
+          [(ngModel)]="data.fullName"
+        />
+        <button
+          mat-button
+          *ngIf="data.fullName"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.fullName = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for fullName-->
+        <mat-error *ngIf="fullName.touched && fullName.invalid">
+          <small *ngIf="fullName.errors?.required" style="color: red;"
+            >Name is required</small
+          >
+          <small *ngIf="fullName.errors?.minlength" style="color: red;"
+            >Name must be at least 3 characters</small
+          >
+          <!-- <small *ngIf="fullName.errors?.forbiddenName" style="color: red;"
+            >Name {{ fullName.errors?.forbiddenName.value }} is not allowed
+          </small> -->
+        </mat-error>
+      </mat-form-field>
+
+      <!-- input title -->
+      <mat-form-field>
+        <mat-label>Enter Title</mat-label>
+        <input
+          [class.is-invalid]="title.invalid && title.touched"
+          formControlName="title"
+          matInput
+          type="text"
+          [(ngModel)]="data.title"
+        />
+        <button
+          mat-button
+          *ngIf="data.title"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.title = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for title -->
+        <mat-error *ngIf="title.touched && title.invalid">
+          <small *ngIf="title.errors?.required" style="color: red;"
+            >Title is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <!-- choose gender -->
+      <div class="radio-group">
+        <p>Gender</p>
+        <mat-radio-group
+          formControlName="gender"
+          aria-label="Gender"
+          [class.is-invalid]="gender.invalid"
+        >
+          <mat-radio-button [checked]="data.gender === 1" value="1"
+            >Nam
+          </mat-radio-button>
+          <mat-radio-button [checked]="data.gender === 2" value="2"
+            >Nu</mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
+
+      <!-- input phone -->
+      <mat-form-field>
+        <mat-label>Enter Phone number</mat-label>
+        <input
+          [class.is-invalid]="phoneNumber.invalid && phoneNumber.touched"
+          formControlName="phoneNumber"
+          matInput
+          type="text"
+          [(ngModel)]="data.phoneNumber"
+        />
+        <button
+          mat-button
+          *ngIf="data.phoneNumber"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.phoneNumber = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for phoneNumber -->
+        <mat-error *ngIf="phoneNumber.touched && phoneNumber.invalid">
+          <small *ngIf="phoneNumber.errors?.required" style="color: red;"
+            >Phone is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <!-- choose dob -->
+      <mat-form-field>
+        <mat-label>Choose birth date</mat-label>
+        <input
+          type="date"
+          matInput
+          formControlName="dateOfBirth"
+          [class.is-invalid]="dateOfBirth.invalid && dateOfBirth.touched"
+          [(ngModel)]="data.dateOfBirth"
+        />
+      </mat-form-field>
+
+      <!-- input address -->
+      <mat-form-field>
+        <mat-label>Enter Address</mat-label>
+        <input
+          [class.is-invalid]="address.invalid && address.touched"
+          formControlName="address"
+          matInput
+          type="text"
+          [(ngModel)]="data.address"
+        />
+        <button
+          mat-button
+          *ngIf="data.address"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.address = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for title -->
+        <mat-error *ngIf="address.touched && address.invalid">
+          <small *ngIf="address.errors?.required" style="color: red;"
+            >Address is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <!-- input email address -->
+      <mat-form-field>
+        <mat-label>Enter Email</mat-label>
+        <input
+          [class.is-invalid]="email.invalid && email.touched"
+          formControlName="email"
+          matInput
+          type="text"
+          [(ngModel)]="data.email"
+        />
+        <button
+          mat-button
+          *ngIf="data.email"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.email = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for title -->
+        <mat-error *ngIf="email.touched && email.invalid">
+          <small *ngIf="email.errors?.required" style="color: red;"
+            >Email is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <!-- input username -->
+      <mat-form-field>
+        <mat-label>Enter Username</mat-label>
+        <input
+          [class.is-invalid]="username.invalid && username.touched"
+          formControlName="username"
+          matInput
+          type="text"
+          [(ngModel)]="data.username"
+        />
+        <button
+          mat-button
+          *ngIf="data.username"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="data.username = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <!-- process error message for title -->
+        <mat-error *ngIf="username.touched && username.invalid">
+          <small *ngIf="username.errors?.required" style="color: red;"
+            >Username is required</small
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <div class="displayButton">
+        <button
+          class="button-submit"
+          *ngIf="data.type === 'create'"
+          [mat-dialog-close]="true"
+          [disabled]="!addForm.valid"
+          mat-raised-button
+          type="submit"
+        >
+          Add Record
+        </button>
+        <button
+          class="button-submit"
+          *ngIf="data.type === 'edit'"
+          [mat-dialog-close]="true"
+          [disabled]="!addForm.valid"
+          mat-raised-button
+          type="submit"
+        >
+          Update
+        </button>
+        <button mat-stroked-button class="component-button" [mat-dialog-close]>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  

@@ -1,0 +1,73 @@
+
+<mat-card>
+    <mat-card-title style="color:mediumslateblue; font-size: 30px;">Login</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter UserName</mat-label>
+          <input
+            [class.is-invalid]="username.invalid && username.touched"
+            formControlName="username"
+            matInput
+            type="text"
+            [(ngModel)]="usernameInput"
+          />
+          <button
+            mat-button
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="usernameInput = ''"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <!-- process error message for fullName-->
+          <mat-error *ngIf="username.touched && username.invalid">
+            <small *ngIf="username.errors?.required" style="color: red;"
+              >Username is required</small
+            >
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Enter Password</mat-label>
+          <input
+            [class.is-invalid]="password.invalid && password.touched"
+            formControlName="password"
+            matInput
+            type="password"
+            [(ngModel)]="passwordInput"
+          />
+          <button
+            mat-button
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="passwordInput = ''"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <!-- process error message for fullName-->
+          <mat-error *ngIf="password.touched && password.invalid">
+            <small *ngIf="password.errors?.required" style="color: red;"
+              >Password is required</small
+            >
+          </mat-error>
+        </mat-form-field>
+  
+        <label id="loginFail">{{loginFailMessage}}</label>
+        <!-- Buttons  -->
+        <div class="displayButton">
+          <button
+            class="button-submit"
+            [disabled]="!addForm.valid"
+            mat-raised-button
+            type="submit"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  
