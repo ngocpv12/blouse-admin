@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         console.log("Login successfully");
         this.loginFailMessage = '';
         
-        window.location.href = "https//blouse-admin.herokuapp.com/doctors";
+        window.location.href = "doctors";
       }
 
     },

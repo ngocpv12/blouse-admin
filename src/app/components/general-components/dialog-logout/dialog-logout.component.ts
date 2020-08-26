@@ -21,6 +21,6 @@ export class DialogLogoutComponent implements OnInit {
   logout(){
     this._auth.logout();
     console.log("Log out successfully!");
-    window.location.href = environment.BLOUSE_ADMIN + "login";
+    window.location.href = "login";
   }
 }
