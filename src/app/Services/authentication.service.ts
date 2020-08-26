@@ -11,11 +11,14 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  constructor(private _http: HttpClient, private _cookieService: CookieService) { }
+  constructor(
+    private _http: HttpClient,
+    private _cookieService: CookieService
+  ) { }
   _url = environment.SERVER_URL + 'auth/login';
 
   login(userData) {
-    return this._http.post<any>(this._url, userData)
+    return this._http.post<any>(this._url, userData, {observe: 'response'})
       .pipe(catchError(this.errorHandler));
   }
   errorHandler(error: HttpErrorResponse) {

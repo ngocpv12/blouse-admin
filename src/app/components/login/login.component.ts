@@ -39,30 +39,36 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required]
   });
 
-  onSubmit() {
+  onSubmit() {   
+    this._authenService.login(this.addForm.value)
+    .subscribe(response => {
+      debugger
+      console.log('response', response.headers.get('access_token'));
+      
+      const token = response.headers.get('access_token');
+      this._cookieService.set('access_token', token, 60 * 60 * 1000);
+      console.log('cookie', this._cookieService.get('access_token'));
+      
+      const tokenPayload = decode(token);
+      
+      if(tokenPayload.role !== "ADMIN" && tokenPayload.role !== "STAFF"){
 
-      this._authenService.login(this.addForm.value)
-      .subscribe(response => {
-        const token = this._cookieService.get('access_token');
-        const tokenPayload = decode(token);
-        if(tokenPayload.role !== "ADMIN" && tokenPayload.role !== "STAFF"){
+        this._cookieService.delete('access_token')
+        this.loginFailMessage = "Bạn không có quyền truy cập vào admin system!";
+        this._router.navigate(["/login"]);
+      }else{
+        console.log("Login successfully");
+        this.loginFailMessage = '';
+        
+        window.location.href = environment.BLOUSE_ADMIN + "doctors";
+      }
 
-          this._cookieService.delete('access_token')
-          this.loginFailMessage = "Bạn không có quyền truy cập vào admin system!";
-          this._router.navigate(["/login"]);
-        }else{
-          console.log("Login successfully");
-          this.loginFailMessage = '';
-          
-          window.location.href= environment.BLOUSE_ADMIN + "doctors";
-        }
+    },
+      error => {
 
-      },
-        error => {
-
-          console.log("login fail", error);
-          this.loginFailMessage = 'Tài khoản hoặc mật khẩu không chính xác';
-        });
+        console.log("login fail", error);
+        this.loginFailMessage = 'Tài khoản hoặc mật khẩu không chính xác';
+      });
     
 
   }
