@@ -24,10 +24,20 @@ export class HeaderComponent implements OnInit {
   loginStatus:boolean = this._cookieService.check('access_token') ? true : false;
   currentUrl;
   currentIndex;
-
+  isStaff:boolean = false;
   ngOnInit(): void {
     this.loginStatus = this._cookieService.check('access_token') ? true : false;
     console.log(this._router.url);
+    if(this.loginStatus == true){
+      const token = this._cookieService.get('access_token');
+      const tokenPayload = decode(token);
+      if(tokenPayload.role =="STAFF"){
+        this.isStaff = true;
+      }else{
+        this.isStaff = false;
+      }
+
+    }
     this.route.paramMap.subscribe((params: ParamMap) => {
       let currentIndex = params.get('currentIndex');
       this.currentIndex = currentIndex;

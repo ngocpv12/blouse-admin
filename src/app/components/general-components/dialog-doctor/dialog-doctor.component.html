@@ -179,6 +179,9 @@
         <small *ngIf="email.errors?.required" style="color: red;"
           >Email is required</small
         >
+        <small *ngIf="email.errors?.pattern" style="color: red;"
+        >email co dang asdf@asfd.com
+        </small>
       </mat-error>
     </mat-form-field>
 
@@ -235,6 +238,9 @@
         <small *ngIf="phoneNumber.errors?.required" style="color: red;"
           >Phone is required</small
         >
+        <small *ngIf="phoneNumber.errors?.pattern" style="color: red;"
+        >La mot day so co 10
+        </small>
       </mat-error>
     </mat-form-field>
     <!-- Buttons  -->

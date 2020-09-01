@@ -87,9 +87,9 @@ export class DialogDoctorComponent implements OnInit {
     title: ['', Validators.required],
     hospital: ['', Validators.required],
     departmentId: ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]],
     address: ['', Validators.required],
-    phoneNumber: ['', Validators.required]
+    phoneNumber: ['', [Validators.required,Validators.pattern('([0-9]{10})')]]
   });
 
 
